@@ -51,6 +51,7 @@ restService.post('/hook', function(req, res) {
           "release_date" : body.results[i].release_date
         }
       }
+      currentIndex = 0;
       app.ask("You might like to watch " + movies[currentIndex].title + ". Relased on " + movies[currentIndex].release_date);
     });
   }
