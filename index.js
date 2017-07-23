@@ -3,12 +3,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ApiAiApp = require('actions-on-google').ApiAiApp;
 const request = require('request');
+const fs = require('fs');
 
 //GLOBAL VARIABLES
 var movies = [];
 var currentIndex = 0;
 var setYear = null;
 var setGenre = null;
+var genreDB = fs.readFileSync("genreID.json");
 
 //SETTING UP SERVICE
 const restService = express();
@@ -52,7 +54,7 @@ restService.post('/hook', function(req, res) {
     }
 
     if(genre != null) {
-      setGenre = genre;
+      setGenre = setGenreID(genre);
       url = url + "&with_genres=" + setGenre;
     }
     else if(setGenre != null) {
@@ -108,4 +110,12 @@ function resetData(){
   currentIndex = 0;
   setYear = null;
   setGenre = null;
+}
+
+function setGenreID(genre) {
+  for (var i = 0 ; i < genreDB.genres.length ; i++) {
+    if(genreDB.genres[i].name.toLoweCase() == genre.toLoweCase()) {
+      return genreDB.genres[i].id;
+    }
+  }
 }
