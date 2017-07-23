@@ -55,9 +55,15 @@ restService.post('/hook', function(req, res) {
     });
   }
 
+  function askingNext(app) {
+    currentIndex += 1;
+    app.ask("Ok, how about " + movies[currentIndex].title + ". Relased on " + movies[currentIndex].release_date);
+  }
+
   //Mapping each "action" as defined in intent with functions in our JS
   const actionMap = new Map();
   actionMap.set('input.welcome', welcomeUser);
   actionMap.set('asking.movie', askingMovie);
+  actionMap.set('next.recco', askingNext);
   app.handleRequest(actionMap);
 });
