@@ -66,7 +66,6 @@ restService.post('/hook', function(req, res) {
       method: 'GET'
     }, function(err, response, body){
       body = JSON.parse(body);
-      movies = [];
       for(var i = 0 ; i < body.results.length ; i++) {
         movies[i] = {
           "title" : body.results[i].title,
@@ -74,6 +73,7 @@ restService.post('/hook', function(req, res) {
           "release_date" : body.results[i].release_date
         }
       }
+      console.log('movies', movies);
       currentIndex = 0;
       app.ask("You might like to watch " + movies[currentIndex].title + ". Relased on " + movies[currentIndex].release_date);
     });
