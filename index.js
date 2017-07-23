@@ -96,7 +96,7 @@ restService.post('/hook', function(req, res) {
   }
 
   function sayingBye(app) {
-    app.tell("All right! Have fun watch the movies. I'll be here when you need me.");
+    app.tell("All right! Have fun watching the movies. I'll be here when you need me.");
   }
 
   //Mapping each "action" as defined in intent with functions in our JS
