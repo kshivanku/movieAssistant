@@ -35,7 +35,7 @@ restService.post('/hook', function(req, res) {
     var date_period = app.getArgument("date-period");
     var genre = app.getArgument("genre");
     var year = date_period.slice(0,4);
-    var url = "https://api.themoviedb.org/3/discover/movie?api_key=cd4cb70f5659be258a39908dd671ee1f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.lte=" + year;
+    var url = "https://api.themoviedb.org/3/discover/movie?api_key=cd4cb70f5659be258a39908dd671ee1f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=" + year;
     if(genre != null) {
       url = url + "&with_genres=" + genre;
     }
