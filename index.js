@@ -66,10 +66,15 @@ restService.post('/hook', function(req, res) {
     }
   }
 
+  function askingPlot(app) {
+    app.ask("Here is the plot of " + movies[currentIndex].title + ". "+ movies[currentIndex].plot);
+  }
+
   //Mapping each "action" as defined in intent with functions in our JS
   const actionMap = new Map();
   actionMap.set('input.welcome', welcomeUser);
   actionMap.set('asking.movie', askingMovie);
   actionMap.set('next.recco', askingNext);
+  actionMap.set('know.plot', askingPlot);
   app.handleRequest(actionMap);
 });
