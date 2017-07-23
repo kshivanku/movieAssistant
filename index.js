@@ -10,7 +10,7 @@ var movies = [];
 var currentIndex = 0;
 var setYear = null;
 var setGenre = null;
-var genreDB = fs.readFileSync("genreID.json");
+var genreDB = JSON.parse(fs.readFileSync("genreID.json"));
 
 //SETTING UP SERVICE
 const restService = express();
