@@ -56,8 +56,14 @@ restService.post('/hook', function(req, res) {
   }
 
   function askingNext(app) {
+    console.log("Inside askingNext");
     currentIndex += 1;
-    app.ask("Ok, how about " + movies[currentIndex].title + ". Relased on " + movies[currentIndex].release_date);
+    if(currentIndex < movies.length) {
+      app.ask("Ok, how about " + movies[currentIndex].title + ". Relased on " + movies[currentIndex].release_date);
+    }
+    else {
+      app.tell("These are all the movies that I have for the given year");
+    }
   }
 
   //Mapping each "action" as defined in intent with functions in our JS
