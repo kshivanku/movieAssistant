@@ -95,12 +95,17 @@ restService.post('/hook', function(req, res) {
     app.ask("Here is the plot of " + movies[currentIndex].title + ". "+ movies[currentIndex].plot);
   }
 
+  function sayingBye(app) {
+    app.tell("All right! Have fun watch the movies. I'll be here when you need me.");
+  }
+
   //Mapping each "action" as defined in intent with functions in our JS
   const actionMap = new Map();
   actionMap.set('input.welcome', welcomeUser);
   actionMap.set('asking.movie', askingMovie);
   actionMap.set('next.recco', askingNext);
   actionMap.set('know.plot', askingPlot);
+  actionMap.set('saying.bye', sayingBye);
   app.handleRequest(actionMap);
 });
 
