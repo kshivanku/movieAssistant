@@ -13,6 +13,16 @@ restService.listen((process.env.PORT || 5000), function() {
 
 //WEBHOOK Requests
 restService.post('/hook', function(req, res) {
-  console.log("request received");
-  console.log(req);
+
+  const app = new ApiAiApp({
+    request: req,
+    response: res
+  });
+
+  function welcomeUser(app){
+    app.ask("Hi! I am your personal movie assistant, which year movie would you want me to recommend?");
+  }
+
+  const actionMap = new Map();
+  actionMap.set('input.welcome', welcomeUser);
 });
