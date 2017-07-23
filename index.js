@@ -22,6 +22,7 @@ restService.post('/hook', function(req, res) {
 
   //Function to handle the welcome intent
   function welcomeUser(app){
+    console.log("inside welcomeUser");
     app.ask("Hi! I am your personal movie assistant, which year movie would you want me to recommend?");
   }
 
