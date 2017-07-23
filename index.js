@@ -7,6 +7,8 @@ const request = require('request');
 //GLOBAL VARIABLES
 var movies = [];
 var currentIndex = 0;
+var setYear = null;
+var setGenre = null;
 
 //SETTING UP SERVICE
 const restService = express();
@@ -18,8 +20,6 @@ restService.listen((process.env.PORT || 5000), function() {
 //WEBHOOK Requests
 restService.post('/hook', function(req, res) {
 
-  console.log("request received");
-
   //Creating a new ApiAiApp
   const app = new ApiAiApp({
     request: req,
@@ -28,17 +28,31 @@ restService.post('/hook', function(req, res) {
 
   //Function to handle the welcome intent
   function welcomeUser(app) {
+    resetData();
     app.ask("Hi! I am your personal movie assistant, which year movie would you want me to recommend?");
   }
 
   function askingMovie(app) {
     var date_period = app.getArgument("date-period");
     var genre = app.getArgument("genre");
-    var year = date_period.slice(0,4);
-    var url = "https://api.themoviedb.org/3/discover/movie?api_key=cd4cb70f5659be258a39908dd671ee1f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=" + year;
-    if(genre != null) {
-      url = url + "&with_genres=" + genre;
+    var url = "https://api.themoviedb.org/3/discover/movie?api_key=cd4cb70f5659be258a39908dd671ee1f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
+
+    if(date_period != null) {
+      setYear = date_period.slice(0,4);
+      url = url + "&primary_release_year=" + setYear;
     }
+    else if(setYear != null) {
+      url = url + "&primary_release_year=" + setYear;
+    }
+
+    if(genre != null) {
+      setGenre = genre;
+      url = url + "&with_genres=" + setGenre;
+    }
+    else if(setGenre != null) {
+      url = url + "&with_genres=" + setGenre;
+    }
+
     request({
       uri: url,
       method: 'GET'
@@ -79,3 +93,10 @@ restService.post('/hook', function(req, res) {
   actionMap.set('know.plot', askingPlot);
   app.handleRequest(actionMap);
 });
+
+function resetData(){
+  movies = [];
+  currentIndex = 0;
+  setYear = null;
+  setGenre = null;
+}
