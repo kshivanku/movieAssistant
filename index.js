@@ -23,12 +23,19 @@ restService.post('/hook', function(req, res) {
   });
 
   //Function to handle the welcome intent
-  function welcomeUser(app){
+  function welcomeUser(app) {
     app.ask("Hi! I am your personal movie assistant, which year movie would you want me to recommend?");
+  }
+
+  function askingMovie(app) {
+    var date_period = app.getArgument("date-period");
+    var genre = app.getArgument("genre");
+    app.ask("getting movie from " + date_period + " from the genre " + genre);
   }
 
   //Mapping each "action" as defined in intent with functions in our JS
   const actionMap = new Map();
   actionMap.set('input.welcome', welcomeUser);
+  actionMap.set('asking.movie', askingMovie);
   app.handleRequest(actionMap);
 });
