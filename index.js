@@ -14,6 +14,8 @@ restService.listen((process.env.PORT || 5000), function() {
 //WEBHOOK Requests
 restService.post('/hook', function(req, res) {
 
+  console.log("request received");
+
   //Creating a new ApiAiApp
   const app = new ApiAiApp({
     request: req,
