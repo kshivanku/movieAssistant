@@ -43,7 +43,7 @@ restService.post('/hook', function(req, res) {
       uri: url,
       method: 'GET'
     }, function(err, response, body){
-      console.log(typeof body);
+      body = JSON.parse(body);
       for(var i = 0 ; i < body.results.length ; i++) {
         movies[i] = {
           "title" : body.results[i].title,
