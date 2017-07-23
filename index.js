@@ -35,6 +35,12 @@ restService.post('/hook', function(req, res) {
   function askingMovie(app) {
     var date_period = app.getArgument("date-period");
     var genre = app.getArgument("genre");
+
+    console.log('date_period', date_period);
+    console.log('genre', genre);
+    console.log('setYear', setYear);
+    console.log('setGenre', setGenre);
+
     var url = "https://api.themoviedb.org/3/discover/movie?api_key=cd4cb70f5659be258a39908dd671ee1f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
 
     if(date_period != null) {
@@ -52,6 +58,8 @@ restService.post('/hook', function(req, res) {
     else if(setGenre != null) {
       url = url + "&with_genres=" + setGenre;
     }
+
+    console.log("Final URL for request: ", url);
 
     request({
       uri: url,
