@@ -75,7 +75,6 @@ restService.post('/hook', function(req, res) {
           "release_date" : body.results[i].release_date
         }
       }
-      console.log('movies', movies);
       currentIndex = 0;
       app.ask("You might like to watch " + movies[currentIndex].title + ". Relased on " + movies[currentIndex].release_date);
     });
@@ -114,8 +113,6 @@ function resetData(){
 
 function setGenreID(genre) {
   for (var i = 0 ; i < genreDB.genres.length ; i++) {
-    console.log('db genre', genreDB.genres[i].name);
-    console.log('user genre', genre);
     if((genreDB.genres[i].name).toLowerCase() == genre.toLowerCase()) {
       return genreDB.genres[i].id;
     }
