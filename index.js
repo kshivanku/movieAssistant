@@ -66,6 +66,7 @@ restService.post('/hook', function(req, res) {
       method: 'GET'
     }, function(err, response, body){
       body = JSON.parse(body);
+      movies = [];
       for(var i = 0 ; i < body.results.length ; i++) {
         movies[i] = {
           "title" : body.results[i].title,
