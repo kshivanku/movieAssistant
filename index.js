@@ -15,4 +15,4 @@ restService.listen((process.env.PORT || 5000), function() {
 restService.post('/hook', function(req, res) {
   console.log("request received");
   console.log(req);
-}
+});
