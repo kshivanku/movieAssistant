@@ -114,7 +114,9 @@ function resetData(){
 
 function setGenreID(genre) {
   for (var i = 0 ; i < genreDB.genres.length ; i++) {
-    if(genreDB.genres[i].name == genre) {
+    console.log('db genre', genreDB.genres[i].name);
+    console.log('user genre', genre);
+    if((genreDB.genres[i].name).toLowerCase() == genre.toLowerCase()) {
       return genreDB.genres[i].id;
     }
   }
