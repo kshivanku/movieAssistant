@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/kshivanku/movieAssistant/issues"
   },
-  "homepage": "https://github.com/kshivanku/movieAssistant#readme"
+  "homepage": "https://github.com/kshivanku/movieAssistant#readme",
+  "dependencies": {
+    "actions-on-google": "^1.2.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "request": "^2.81.0"
+  }
 }
