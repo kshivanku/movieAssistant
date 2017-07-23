@@ -4,6 +4,10 @@ const bodyParser = require('body-parser');
 const ApiAiApp = require('actions-on-google').ApiAiApp;
 const request = require('request');
 
+//GLOBAL VARIABLES
+var movies = [];
+var currentIndex = 0;
+
 //SETTING UP SERVICE
 const restService = express();
 restService.use(bodyParser.json());
@@ -39,9 +43,15 @@ restService.post('/hook', function(req, res) {
       uri: url,
       method: 'GET'
     }, function(err, response, body){
-      console.log(body);
+      for(var i = 0 ; i < body.results.length ; i++) {
+        movies[i] = {
+          "title" : body.results[i].title,
+          "plot" : body.results[i].overview,
+          "release_date" : body.results[i].release_date
+        }
+      }
+      app.ask("You might like to watch " + movies[currentIndex].title + ". Relased on " + movies[currentIndex].release_date);
     });
-    app.ask("getting movie from " + date_period + " from the genre " + genre);
   }
 
   //Mapping each "action" as defined in intent with functions in our JS
